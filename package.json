@@ -1,0 +1,24 @@
+{
+  "name": "dmoney-agent-e2e",
+  "version": "1.0.0",
+  "private": true,
+  "description": "Playwright + TypeScript end-to-end suite for the DMoney portal Agent workflow",
+  "scripts": {
+    "test": "playwright test",
+    "regression": "cross-env REPORT_DIR=reports/regression playwright test",
+    "regression:headed": "cross-env REPORT_DIR=reports/regression playwright test --headed",
+    "smoke": "cross-env REPORT_DIR=reports/smoke playwright test --grep @smoke",
+    "smoke:headed": "cross-env REPORT_DIR=reports/smoke playwright test --grep @smoke --headed",
+    "list": "playwright test --list",
+    "report": "playwright show-report",
+    "typecheck": "tsc --noEmit"
+  },
+  "license": "ISC",
+  "devDependencies": {
+    "@playwright/test": "^1.63.0",
+    "@types/node": "^26.6.6",
+    "cross-env": "^10.1.0",
+    "dotenv": "^18.0.9",
+    "typescript": "^7.0.2"
+  }
+}
