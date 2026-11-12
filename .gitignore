@@ -1,0 +1,18 @@
+node_modules/
+.env
+.env.*
+!.env.example
+
+# generated on every run
+reports/
+test-results/
+blob-report/
+playwright/.cache/
+.auth/
+recordings/
+
+.claude/settings.local.json
+.DS_Store
+Thumbs.db
+.vscode/
+.idea/
