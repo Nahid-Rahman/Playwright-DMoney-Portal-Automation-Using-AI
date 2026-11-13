@@ -145,30 +145,32 @@ Every run records the journey to `recordings/agent-flow.webm`. Set `SLOW_MO=350`
 
 ## Regression Test Result
 
-*Add after running `npm run regression`:*
+`npm run regression` – 24 passed:
 
-<!-- ![Regression terminal](docs/screenshots/regression-terminal.png) -->
+![Regression terminal](docs/screenshots/regression-terminal.png)
 
-<!-- ![Regression report](docs/screenshots/regression-report.png) -->
+![Regression report](docs/screenshots/regression-report.png)
 
 ## SmokeTest Result
 
-*Add after running `npm run smoke`:*
+`npm run smoke` – 21 passed (positive tests only):
 
-<!-- ![Smoke terminal](docs/screenshots/smoke-terminal.png) -->
+![Smoke terminal](docs/screenshots/smoke-terminal.png)
 
-<!-- ![Smoke report](docs/screenshots/smoke-report.png) -->
+![Smoke report](docs/screenshots/smoke-report.png)
 
 ## CSV output
 
 `output/self_statement_<date>.csv` – columns match the Self Statement table, values are RFC-4180 quoted
 (the date contains a comma). TC20 reads the file back and compares it with the table rows.
 
-<!-- ![CSV](docs/screenshots/csv-output.png) -->
+![CSV](docs/screenshots/csv-output.png)
 
 ## Headed run video
 
-<!-- Copy recordings/agent-flow.webm (or an mp4 export) to docs/videos/ and link it here. -->
+Full journey (TC01–TC20) recorded with `SLOW_MO=350 npm run regression:headed` – 24 passed:
+
+[▶ Watch the headed run (docs/videos/agent-flow.webm)](docs/videos/agent-flow.webm)
 
 ## AI harness
 
@@ -190,4 +192,5 @@ Every run records the journey to `recordings/agent-flow.webm`. Set `SLOW_MO=350`
 * **Commission.** The Agent earns 2.5 % on a customer cash-in, so the balance ends at **1512.50** and the statement shows credit 12.50.
 * **Customer cap (~10,000 Tk).** A fresh active Customer is created before the journey; override with `EXISTING_CUSTOMER_PHONE`.
 * **Statement pagination** counts all-time rows but shows only today's; collection stops at the first empty page.
+* **Statement date filter** defaults to the UTC date while rows are filtered by local date, so between 00:00 and 06:00 Dhaka time the default view is empty. The suite sets both dates to the local date.
 
