@@ -172,6 +172,8 @@ Full journey (TC01–TC20) recorded with `SLOW_MO=350 npm run regression:headed`
 
 [▶ Watch the headed run (docs/videos/agent-flow.webm)](docs/videos/agent-flow.webm)
 
+https://github.com/user-attachments/assets/791e4d65-fbba-44fc-81de-fb8bacaa3f6a
+
 ## AI harness
 
 |File|What it does|
