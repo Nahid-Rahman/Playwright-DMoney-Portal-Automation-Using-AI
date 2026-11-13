@@ -41,6 +41,7 @@ let page: Page;
 let request: APIRequestContext;
 let office: Backoffice;
 let auth: AuthScreen;
+let signUp: SignUpScreen;
 let users: UserAdminScreen;
 let deposit: DepositScreen;
 let statement: StatementScreen;
@@ -58,6 +59,7 @@ test.beforeAll(async ({ browser, playwright }) => {
   office = backoffice(request);
 
   auth = new AuthScreen(page);
+  signUp = new SignUpScreen(page);
   users = new UserAdminScreen(page);
   deposit = new DepositScreen(page);
   statement = new StatementScreen(page);
@@ -88,7 +90,6 @@ test.afterAll(async () => {
 test.describe('1 · Agent sign-up', () => {
   test('TC01 a new Agent can register', { tag: '@smoke' }, async () => {
     const draft = freshAccount('Agent', settings.agent.initialPassword);
-    const signUp = new SignUpScreen(page);
 
     await test.step('open Sign Up from the home page', () => signUp.reachFromHome());
     await test.step('fill the form with Agent role', () => signUp.complete(draft));
@@ -105,6 +106,9 @@ test.describe('1 · Agent sign-up', () => {
   });
 
   test('TC02 the new Agent starts inactive (pending)', { tag: '@smoke' }, async () => {
+    await expect(signUp.pendingNotice, 'the portal tells the new Agent it awaits approval').toContainText(
+      'pending approval by an admin',
+    );
     expect(run.statusAtSignUp, 'status returned by the registration call').toBe('pending');
   });
 });
