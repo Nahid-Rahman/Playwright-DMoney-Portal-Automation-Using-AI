@@ -1,5 +1,6 @@
 import { expect, type Locator, type Page } from '@playwright/test';
 import type { LedgerEntry } from '../core/models';
+import { localDate } from '../support/factory';
 import { TopBar } from './TopBar';
 
 const TITLE = /^Transaction History \(Total: (\d+)\)/;
@@ -17,7 +18,19 @@ export class StatementScreen {
     await this.page.getByRole('link', { name: 'Self Statement' }).first().click();
     await expect(this.page).toHaveURL(/\/agent\/self-statement$/);
     await expect(this.page.getByText(TITLE)).toBeVisible();
+    await this.showLocalToday();
     await expect(this.bodyRows.first()).toBeVisible();
+  }
+
+  /**
+   * Quirk: the date filter defaults to the UTC date, but rows are filtered by local date.
+   * Between 00:00 and 06:00 Dhaka time that hides today's rows, so set both dates explicitly.
+   */
+  private async showLocalToday(): Promise<void> {
+    const today = localDate();
+    await this.page.getByRole('textbox', { name: 'From Date' }).fill(today);
+    await this.page.getByRole('textbox', { name: 'To Date' }).fill(today);
+    await expect(this.page.getByRole('main')).toContainText(`from ${today} to ${today}`);
   }
 
   async columnNames(): Promise<string[]> {

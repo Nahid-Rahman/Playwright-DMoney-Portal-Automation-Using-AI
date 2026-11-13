@@ -40,7 +40,10 @@ Registration only accepts `@gmail.com`, and the suite cannot open that inbox. Th
 ## Self Statement – `/agent/self-statement`
 - Columns: Transaction ID, Sender Account, Receiver Account, Type, Debit, Credit, Balance, Date. Empty money cell is `-`.
 - Agent: `Top-up from SYSTEM` (credit 2000), `Deposit Commission` (debit 500, credit 12.50). System: `System Deposit to Agent` (debit 2000).
-- Defaults to **today**. The paginator counts all-time rows, but each page only renders rows within the date filter. Rows are newest first, so stop at the first empty page (`StatementScreen.collectAll`).
+- Date filter: `From Date` / `To Date` textboxes (`type=date`). The default is the **UTC** date, but rows are
+  filtered by **local** date, so from 00:00 to 06:00 Dhaka time the default shows nothing.
+  `StatementScreen.open()` sets both dates to `localDate()`.
+- The paginator counts all-time rows, but each page only renders rows within the date filter. Rows are newest first, so stop at the first empty page (`StatementScreen.collectAll`).
 
 ## DOM quirks
 - Sidebar rendered twice (drawer + permanent).
